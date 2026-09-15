@@ -1,0 +1,61 @@
+{
+    "monitor": {
+        "scan_interval_ms": 200,
+        "track_tcp": true,
+        "track_udp": true,
+        "ignore_loopback": true,
+        "ignore_lan": true,
+        "trusted_processes": [
+            "System",
+            "svchost.exe"
+        ]
+    },
+    "dns": {
+        "enabled": true,
+        "cache_size": 4096,
+        "timeout_ms": 1500
+    },
+    "alerts": {
+        "burst_threshold": 25,
+        "burst_window_seconds": 10,
+        "bandwidth_spike_bytes_per_sec": 5242880,
+        "suspicious_paths": [
+            "\\AppData\\Local\\Temp",
+            "\\AppData\\Roaming",
+            "\\Users\\Public",
+            "\\Windows\\Temp"
+        ],
+        "alert_unusual_ports": true,
+        "standard_ports": [80, 443, 53, 22, 123, 8080, 8443, 5228, 5222],
+        "blacklist_domains": [],
+        "blacklist_ips": []
+    },
+    "logging": {
+        "log_dir": "logs",
+        "daily_folder": true,
+        "max_file_size_mb": 100,
+        "backup_count": 20,
+        "enable_text_log": true,
+        "enable_jsonl": true,
+        "format_template": "[{timestamp}] [{event:<8}] {process_name:<18} (PID: {pid:<5}) -> {remote_ip}:{remote_port:<5} [{domain}] | Proto: {protocol} | State: {state} | Path: {process_path}",
+        "timestamp_format": "2006-01-02 15:04:05"
+    },
+    "database": {
+        "enabled": true,
+        "db_path": "data/network_history.db",
+        "retention_days": 30
+    },
+    "ui": {
+        "rows_per_page": 20
+    },
+    "service": {
+        "name": "NetworkTracker",
+        "display_name": "Network Tracker Monitoring Service",
+        "description": "24/7 background network connection monitor, ephemeral process tracker, and anomaly detection system.",
+        "executable_path": "dist/network-tracker.exe",
+        "candidate_paths": [
+            "dist/network-tracker.exe",
+            "network-tracker.exe"
+        ]
+    }
+}
